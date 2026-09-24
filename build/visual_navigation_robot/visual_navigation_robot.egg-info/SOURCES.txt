@@ -4,6 +4,7 @@ setup.py
 launch/display_robot.launch.py
 launch/gazebo.launch.py
 launch/perception.launch.py
+launch/visual_odometry.launch.py
 resource/visual_navigation_robot
 rviz/robot_view.rviz
 urdf/materials.xacro
@@ -19,6 +20,8 @@ visual_navigation_robot.egg-info/entry_points.txt
 visual_navigation_robot.egg-info/requires.txt
 visual_navigation_robot.egg-info/top_level.txt
 visual_navigation_robot.egg-info/zip-safe
+visual_navigation_robot/localization/__init__.py
+visual_navigation_robot/localization/visual_odometry_node.py
 visual_navigation_robot/perception/__init__.py
 visual_navigation_robot/perception/feature_extraction.py
 visual_navigation_robot/perception/feature_tracking.py
