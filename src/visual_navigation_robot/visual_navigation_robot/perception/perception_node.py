@@ -13,9 +13,10 @@ class PerceptionNode(Node):
     def __init__(self):
         super().__init__('perception_node')
         
+        # Subscribes to degraded image stream for experimental evaluation
         self.subscription = self.create_subscription(
             Image,
-            '/camera/image_raw',
+            '/camera/image_degraded',
             self.image_callback,
             10
         )
@@ -29,7 +30,7 @@ class PerceptionNode(Node):
         self.prev_gray = None
         self.prev_pts = None
 
-        self.get_logger().info('Perception Node initialized with OpenCV LK-Tracker.')
+        self.get_logger().info('Perception Node subscribed to /camera/image_degraded.')
 
     def image_callback(self, msg: Image):
         try:

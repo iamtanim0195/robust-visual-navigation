@@ -2,13 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.10.0] - Phase 12 & 13 Complete
+## [0.12.0] - Phase 16 Complete
 ### Added
-- Created `localization/ground_truth_publisher.py` for ATE trajectory error benchmark extraction on `/ground_truth/odom`.
-- Added SLAM mapping config (`config/mapper_params_online_async.yaml`) and integration launch file (`launch/mapping.launch.py`).
+- Created `perception/visual_degradation.py` implementing Gaussian Blur, Resolution Downsampling, and Illumination scaling.
+- Updated `perception_node` and `visual_odometry_node` to process `/camera/image_degraded`.
+- Added `launch/degradation_experiment.launch.py` supporting CLI args (`sensor_config`, `degradation_mode`, `severity_level`).
 
-## [0.9.0] - Phase 11 Complete
+## [0.11.0] - Phase 14 & 15 Complete
 ### Added
-- Integrated `robot_localization` EKF filter configurations for $S_1, S_2, S_3, S_4$ modes (`config/ekf_s*.yaml`).
-- Created `launch/sensor_fusion.launch.py` with runtime configuration argument `sensor_config:=s1|s2|s3|s4`.
-- Enabled filtered odometry output over `/odometry/filtered`.
+- Created `navigation/waypoint_navigator.py` implementing classical proportional velocity control.
+- Added `navigation/experiment_logger.py` logging ATE error metrics and trajectory data to CSV (`experiments/raw/`).
+- Created `launch/baseline_navigation.launch.py`.

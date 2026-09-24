@@ -24,7 +24,8 @@ class VisualOdometryNode(Node):
     def __init__(self):
         super().__init__('visual_odometry_node')
 
-        self.sub_image = self.create_subscription(Image, '/camera/image_raw', self.image_callback, 10)
+        # Subscribes to degraded image stream
+        self.sub_image = self.create_subscription(Image, '/camera/image_degraded', self.image_callback, 10)
         self.sub_info = self.create_subscription(CameraInfo, '/camera/camera_info', self.info_callback, 10)
         self.pub_vo = self.create_publisher(Odometry, '/visual_odometry/odom', 10)
 
@@ -33,7 +34,6 @@ class VisualOdometryNode(Node):
         self.extractor = FeatureExtractor(max_corners=300)
         self.tracker = FeatureTracker()
 
-        # Camera intrinsic matrix defaults (overridden by camera_info)
         self.K = np.array([
             [500.0, 0.0, 320.0],
             [0.0, 500.0, 240.0],
@@ -43,12 +43,11 @@ class VisualOdometryNode(Node):
         self.prev_gray = None
         self.prev_pts = None
 
-        # Accumulated VO pose state (x, y, yaw)
         self.cur_x = 0.0
         self.cur_y = 0.0
         self.cur_yaw = 0.0
 
-        self.get_logger().info('Visual Odometry Node initialized.')
+        self.get_logger().info('Visual Odometry Node subscribed to /camera/image_degraded.')
 
     def info_callback(self, msg: CameraInfo):
         if msg.k[0] != 0:
@@ -74,9 +73,8 @@ class VisualOdometryNode(Node):
                 if E is not None and E.shape == (3, 3):
                     _, R, t, mask_pose = cv2.recoverPose(E, good_new, good_old, self.K)
 
-                    # Extract relative yaw angle and linear translation step
                     d_yaw = math.atan2(R[1, 0], R[0, 0])
-                    step_scale = 0.01  # Fixed velocity scale factor for planar camera motion
+                    step_scale = 0.01
 
                     dx = t[2, 0] * step_scale
                     dy = -t[0, 0] * step_scale
