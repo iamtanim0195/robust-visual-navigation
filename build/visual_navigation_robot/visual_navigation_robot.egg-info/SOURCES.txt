@@ -6,6 +6,7 @@ config/ekf_s2_vision_wheel.yaml
 config/ekf_s3_vision_imu.yaml
 config/ekf_s4_full_fusion.yaml
 config/mapper_params_online_async.yaml
+launch/baseline_navigation.launch.py
 launch/degradation_experiment.launch.py
 launch/display_robot.launch.py
 launch/gazebo.launch.py
@@ -37,4 +38,7 @@ visual_navigation_robot/perception/feature_tracking.py
 visual_navigation_robot/perception/image_preprocessing.py
 visual_navigation_robot/perception/perception_node.py
 visual_navigation_robot/perception/visual_degradation.py
+visual_navigation_robot/reinforcement_learning/__init__.py
+visual_navigation_robot/reinforcement_learning/nav_gym_env.py
+visual_navigation_robot/reinforcement_learning/train_ppo.py
 worlds/research_world.sdf

@@ -32,6 +32,7 @@ setup(
             'ground_truth_publisher = visual_navigation_robot.localization.ground_truth_publisher:main',
             'waypoint_navigator = visual_navigation_robot.navigation.waypoint_navigator:main',
             'experiment_logger = visual_navigation_robot.navigation.experiment_logger:main',
+            'train_ppo = visual_navigation_robot.reinforcement_learning.train_ppo:main',
         ],
     },
 )
