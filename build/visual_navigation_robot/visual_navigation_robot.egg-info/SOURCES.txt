@@ -1,0 +1,16 @@
+package.xml
+setup.cfg
+setup.py
+launch/display_robot.launch.py
+resource/visual_navigation_robot
+rviz/robot_view.rviz
+urdf/materials.xacro
+urdf/robot.urdf.xacro
+urdf/robot_core.xacro
+visual_navigation_robot/__init__.py
+visual_navigation_robot.egg-info/PKG-INFO
+visual_navigation_robot.egg-info/SOURCES.txt
+visual_navigation_robot.egg-info/dependency_links.txt
+visual_navigation_robot.egg-info/requires.txt
+visual_navigation_robot.egg-info/top_level.txt
+visual_navigation_robot.egg-info/zip-safe
