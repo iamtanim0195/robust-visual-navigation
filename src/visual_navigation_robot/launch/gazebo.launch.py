@@ -1,9 +1,8 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import xacro
 
@@ -37,7 +36,7 @@ def generate_launch_description():
         launch_arguments={'gz_args': f'-r {world_file}'}.items()
     )
 
-    # Spawn Robot Entity in Gazebo
+    # Spawn Robot Entity
     node_spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
@@ -49,7 +48,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # ROS-Gazebo Clock and Joint State Bridge
+    # ROS-Gazebo Topic Bridge
     node_ros_gz_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -58,7 +57,16 @@ def generate_launch_description():
             '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
             '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-            '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'
+            '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
+            # Camera Bridges
+            '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            # IMU Bridge
+            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU',
+            '/world/research_world/model/visual_navigation_robot/link/imu_link/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU'
+        ],
+        remappings=[
+            ('/world/research_world/model/visual_navigation_robot/link/imu_link/sensor/imu_sensor/imu', '/imu/data')
         ],
         output='screen'
     )

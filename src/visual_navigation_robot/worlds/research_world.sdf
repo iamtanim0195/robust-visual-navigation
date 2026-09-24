@@ -1,27 +1,19 @@
 <?xml version="1.0" ?>
 <sdf version="1.8">
   <world name="research_world">
-    <!-- Physics Configuration -->
     <physics name="1ms" type="ignored">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
     </physics>
 
-    <!-- Plugins -->
-    <plugin
-      filename="gz-sim-physics-system"
-      name="gz::sim::systems::Physics">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
     </plugin>
-    <plugin
-      filename="gz-sim-user-commands-system"
-      name="gz::sim::systems::UserCommands">
-    </plugin>
-    <plugin
-      filename="gz-sim-scene-broadcaster-system"
-      name="gz::sim::systems::SceneBroadcaster">
-    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
 
-    <!-- Global Sun Light Source -->
     <light type="directional" name="sun">
       <cast_shadows>true</cast_shadows>
       <pose>0 0 10 0 0 0</pose>
@@ -36,7 +28,6 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
 
-    <!-- Ground Plane -->
     <model name="ground_plane">
       <static>true</static>
       <link name="link">
@@ -64,12 +55,10 @@
       </link>
     </model>
 
-    <!-- Arena Boundary Box (5m x 5m) -->
     <model name="arena_walls">
       <static>true</static>
       <pose>0 0 0.5 0 0 0</pose>
 
-      <!-- North Wall -->
       <link name="north_wall">
         <pose>2.5 0 0 0 0 0</pose>
         <collision name="col"><geometry><box><size>0.1 5.0 1.0</size></box></geometry></collision>
@@ -78,7 +67,6 @@
         </visual>
       </link>
 
-      <!-- South Wall -->
       <link name="south_wall">
         <pose>-2.5 0 0 0 0 0</pose>
         <collision name="col"><geometry><box><size>0.1 5.0 1.0</size></box></geometry></collision>
@@ -87,7 +75,6 @@
         </visual>
       </link>
 
-      <!-- East Wall -->
       <link name="east_wall">
         <pose>0 2.5 0 0 0 0</pose>
         <collision name="col"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></collision>
@@ -96,7 +83,6 @@
         </visual>
       </link>
 
-      <!-- West Wall -->
       <link name="west_wall">
         <pose>0 -2.5 0 0 0 0</pose>
         <collision name="col"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></collision>
@@ -106,7 +92,6 @@
       </link>
     </model>
 
-    <!-- Research Obstacle Landmarks -->
     <model name="pillar_1">
       <static>true</static>
       <pose>1.0 1.0 0.5 0 0 0</pose>

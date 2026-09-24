@@ -9,6 +9,7 @@ urdf/materials.xacro
 urdf/robot.urdf.xacro
 urdf/robot_core.xacro
 urdf/robot_gazebo.xacro
+urdf/sensors.xacro
 visual_navigation_robot/__init__.py
 visual_navigation_robot.egg-info/PKG-INFO
 visual_navigation_robot.egg-info/SOURCES.txt

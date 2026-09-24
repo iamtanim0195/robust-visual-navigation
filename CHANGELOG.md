@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.1] - Phase 6 & 7 Fix
+### Fixed
+- Mapped Gazebo Sim IMU scoped topic (`/world/research_world/model/visual_navigation_robot/link/imu_link/sensor/imu_sensor/imu`) to ROS 2 `/imu/data` topic in `launch/gazebo.launch.py`.
+
+## [0.6.0] - Phase 6 & 7 Complete
+### Added
+- Added `urdf/sensors.xacro` featuring RGB camera (ESP32-CAM spec) and MPU6050 IMU plugins.
+- Updated `launch/gazebo.launch.py` with image and IMU topic bridges (`/camera/image_raw`, `/imu/data`).
+
 ## [0.5.0] - Phase 4 Complete
 ### Added
 - Created Gazebo Sim plugins for differential drive (`robot_gazebo.xacro`).
