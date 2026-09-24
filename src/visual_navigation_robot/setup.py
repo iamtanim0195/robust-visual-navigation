@@ -28,6 +28,7 @@ setup(
         'console_scripts': [
             'perception_node = visual_navigation_robot.perception.perception_node:main',
             'visual_odometry_node = visual_navigation_robot.localization.visual_odometry_node:main',
+            'ground_truth_publisher = visual_navigation_robot.localization.ground_truth_publisher:main',
         ],
     },
 )

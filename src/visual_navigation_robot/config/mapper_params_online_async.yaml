@@ -1,0 +1,24 @@
+slam_toolbox:
+  ros__parameters:
+    solver_plugin: solver_plugins::CeresSolver
+    ceressolver_linear_solver_type: SPARSE_NORMAL_CHOLESKY
+    ceressolver_preconditioner_type: JACOBI
+    ceressolver_trust_region_strategy_type: LEVENBERG_MARQUARDT
+
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_footprint
+    scan_topic: /scan
+
+    mode: mapping
+    debug_logging: false
+    throttle_scans: 1
+    transform_publish_period: 0.05
+    map_update_interval: 1.0
+    granularity: 0.05
+    max_laser_range: 8.0
+    minimum_time_interval: 0.1
+    transform_timeout: 0.2
+    tf_buffer_duration: 30.0
+    stack_size_to_use: 40000000
+    enable_interactive_mode: true
