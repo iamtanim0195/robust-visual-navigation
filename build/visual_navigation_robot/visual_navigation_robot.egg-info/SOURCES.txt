@@ -3,6 +3,7 @@ setup.cfg
 setup.py
 launch/display_robot.launch.py
 launch/gazebo.launch.py
+launch/perception.launch.py
 resource/visual_navigation_robot
 rviz/robot_view.rviz
 urdf/materials.xacro
@@ -14,7 +15,13 @@ visual_navigation_robot/__init__.py
 visual_navigation_robot.egg-info/PKG-INFO
 visual_navigation_robot.egg-info/SOURCES.txt
 visual_navigation_robot.egg-info/dependency_links.txt
+visual_navigation_robot.egg-info/entry_points.txt
 visual_navigation_robot.egg-info/requires.txt
 visual_navigation_robot.egg-info/top_level.txt
 visual_navigation_robot.egg-info/zip-safe
+visual_navigation_robot/perception/__init__.py
+visual_navigation_robot/perception/feature_extraction.py
+visual_navigation_robot/perception/feature_tracking.py
+visual_navigation_robot/perception/image_preprocessing.py
+visual_navigation_robot/perception/perception_node.py
 worlds/research_world.sdf
