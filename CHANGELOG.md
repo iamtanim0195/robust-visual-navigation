@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - Phase 4 Complete
+### Added
+- Created Gazebo Sim plugins for differential drive (`robot_gazebo.xacro`).
+- Designed indoor test arena SDF world (`worlds/research_world.sdf`).
+- Created Gazebo launch script (`launch/gazebo.launch.py`) with ROS-Gazebo topic bridges.
+
 ## [0.4.1] - Phase 3 Refinement
 ### Changed
 - Updated `urdf/robot_core.xacro` to a rectangular 2WD chassis (0.20m x 0.15m x 0.06m) with 2 rear drive wheels and 1 front caster wheel.
