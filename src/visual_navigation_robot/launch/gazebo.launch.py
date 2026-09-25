@@ -28,12 +28,12 @@ def generate_launch_description():
         parameters=[robot_description, {'use_sim_time': True}]
     )
 
-    # Gazebo Sim Launch
+    # Gazebo Sim Launch with -r (run physics automatically)
     gazebo_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(ros_gz_sim_share, 'launch', 'gz_sim.launch.py')
         ),
-        launch_arguments={'gz_args': f'-r {world_file}'}.items()
+        launch_arguments={'gz_args': f'-r -v 4 {world_file}'}.items()
     )
 
     # Spawn Robot Entity
@@ -58,15 +58,9 @@ def generate_launch_description():
             '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
-            # Camera Bridges
             '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
             '/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
-            # IMU Bridge
-            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU',
-            '/world/research_world/model/visual_navigation_robot/link/imu_link/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU'
-        ],
-        remappings=[
-            ('/world/research_world/model/visual_navigation_robot/link/imu_link/sensor/imu_sensor/imu', '/imu/data')
+            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU'
         ],
         output='screen'
     )
