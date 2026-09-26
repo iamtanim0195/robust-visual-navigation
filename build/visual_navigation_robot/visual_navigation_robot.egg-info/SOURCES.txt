@@ -36,6 +36,7 @@ visual_navigation_robot/localization/ground_truth_publisher.py
 visual_navigation_robot/localization/visual_odometry_node.py
 visual_navigation_robot/navigation/__init__.py
 visual_navigation_robot/navigation/experiment_logger.py
+visual_navigation_robot/navigation/nav2_room_navigator.py
 visual_navigation_robot/navigation/waypoint_navigator.py
 visual_navigation_robot/perception/__init__.py
 visual_navigation_robot/perception/feature_extraction.py
