@@ -1,24 +1,19 @@
 locations:
   home:
-    x: 0.0
-    y: 0.0
-    yaw: 0.0
-    description: "Corridor Junction / Starting Point"
-  
+    waypoints:
+      - {x: 0.0, y: 0.0}
+
   room_1:
-    x: -5.0
-    y: 5.0
-    yaw: 0.0
-    description: "Office Room with Table"
+    waypoints:
+      - {x: -2.5, y: 0.0}   # Drive down left corridor
+      - {x: -5.0, y: 5.0}   # Turn into Room 1
 
   room_2:
-    x: 0.5
-    y: 5.0
-    yaw: 1.57
-    description: "Lab Room with Pillar Landmark"
+    waypoints:
+      - {x: 0.0, y: 2.5}    # Drive up central corridor
+      - {x: 0.5, y: 5.0}    # Turn into Room 2
 
   room_3:
-    x: 5.0
-    y: -5.0
-    yaw: -0.785
-    description: "Conference Room"
+    waypoints:
+      - {x: 2.5, y: 0.0}    # Drive down right corridor
+      - {x: 5.0, y: -5.0}   # Turn through doorway into Room 3

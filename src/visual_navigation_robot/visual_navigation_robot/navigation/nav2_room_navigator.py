@@ -6,7 +6,7 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from geometry_msgs.msg import PoseStamped
-from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
+from nav2_simple_commander.robot_navigator import BasicNavigator
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -15,6 +15,17 @@ class Nav2RoomNavigator(Node):
         super().__init__('nav2_room_navigator')
 
         self.navigator = BasicNavigator()
+
+        # Set initial pose estimate (Home at 0.0, 0.0)
+        initial_pose = PoseStamped()
+        initial_pose.header.frame_id = 'map'
+        initial_pose.header.stamp = self.navigator.get_clock().now().to_msg()
+        initial_pose.pose.position.x = 0.0
+        initial_pose.pose.position.y = 0.0
+        initial_pose.pose.orientation.w = 1.0
+        
+        self.navigator.setInitialPose(initial_pose)
+        self.get_logger().info("Nav2 Initial Pose set to (0.0, 0.0)")
 
         # Subscribe to Web UI Dispatch topic
         self.room_sub = self.create_subscription(
@@ -58,14 +69,12 @@ class Nav2RoomNavigator(Node):
         goal_pose.header.stamp = self.navigator.get_clock().now().to_msg()
         goal_pose.pose.position.x = x
         goal_pose.pose.position.y = y
-        goal_pose.pose.position.z = 0.0
-
-        # Simple Yaw Quaternion conversion around Z-axis
+        
         import math
         goal_pose.pose.orientation.z = math.sin(yaw / 2.0)
         goal_pose.pose.orientation.w = math.cos(yaw / 2.0)
 
-        self.get_logger().info(f"Nav2: Planning global path to {location_name} ({x:.2f}, {y:.2f})...")
+        self.get_logger().info(f"Nav2: Planning path to {location_name} ({x:.2f}, {y:.2f})...")
         self.navigator.goToPose(goal_pose)
 
 
