@@ -1,6 +1,7 @@
 package.xml
 setup.cfg
 setup.py
+config/building_locations.yaml
 config/ekf_s1_vision_only.yaml
 config/ekf_s2_vision_wheel.yaml
 config/ekf_s3_vision_imu.yaml
@@ -17,6 +18,7 @@ launch/visual_odometry.launch.py
 resource/visual_navigation_robot
 rviz/robot_view.rviz
 urdf/materials.xacro
+urdf/robot.urdf
 urdf/robot.urdf.xacro
 urdf/robot_core.xacro
 urdf/robot_gazebo.xacro
@@ -32,6 +34,9 @@ visual_navigation_robot.egg-info/zip-safe
 visual_navigation_robot/localization/__init__.py
 visual_navigation_robot/localization/ground_truth_publisher.py
 visual_navigation_robot/localization/visual_odometry_node.py
+visual_navigation_robot/navigation/__init__.py
+visual_navigation_robot/navigation/experiment_logger.py
+visual_navigation_robot/navigation/waypoint_navigator.py
 visual_navigation_robot/perception/__init__.py
 visual_navigation_robot/perception/feature_extraction.py
 visual_navigation_robot/perception/feature_tracking.py
@@ -41,4 +46,5 @@ visual_navigation_robot/perception/visual_degradation.py
 visual_navigation_robot/reinforcement_learning/__init__.py
 visual_navigation_robot/reinforcement_learning/nav_gym_env.py
 visual_navigation_robot/reinforcement_learning/train_ppo.py
+worlds/building_world.sdf
 worlds/research_world.sdf

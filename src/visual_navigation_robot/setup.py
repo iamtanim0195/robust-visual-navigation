@@ -7,7 +7,7 @@ package_name = 'visual_navigation_robot'
 setup(
     name=package_name,
     version='0.1.0',
-    packages=find_packages(exclude=['test']),
+    packages=find_packages(include=[package_name, f'{package_name}.*']),
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
@@ -21,7 +21,7 @@ setup(
     zip_safe=True,
     maintainer='Md. Sahadat Hossen Tanim',
     maintainer_email='tanim@todo.todo',
-    description='Robust Vision-Based Autonomous Navigation for a Low-Cost Mobile Robot under Visual Degradation',
+    description='Robust Vision-Based Autonomous Navigation',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={

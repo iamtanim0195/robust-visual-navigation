@@ -1,0 +1,24 @@
+locations:
+  home:
+    x: 0.0
+    y: 0.0
+    yaw: 0.0
+    description: "Corridor Junction / Starting Point"
+  
+  room_1:
+    x: -5.0
+    y: 5.0
+    yaw: 0.0
+    description: "Office Room with Table"
+
+  room_2:
+    x: 0.5
+    y: 5.0
+    yaw: 1.57
+    description: "Lab Room with Pillar Landmark"
+
+  room_3:
+    x: 5.0
+    y: -5.0
+    yaw: -0.785
+    description: "Conference Room"

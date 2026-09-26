@@ -1,0 +1,53 @@
+running develop
+running egg_info
+creating visual_navigation_robot.egg-info
+writing visual_navigation_robot.egg-info/PKG-INFO
+writing dependency_links to visual_navigation_robot.egg-info/dependency_links.txt
+writing entry points to visual_navigation_robot.egg-info/entry_points.txt
+writing requirements to visual_navigation_robot.egg-info/requires.txt
+writing top-level names to visual_navigation_robot.egg-info/top_level.txt
+writing manifest file 'visual_navigation_robot.egg-info/SOURCES.txt'
+reading manifest file 'visual_navigation_robot.egg-info/SOURCES.txt'
+writing manifest file 'visual_navigation_robot.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/python3.12/site-packages/visual-navigation-robot.egg-link (link to .)
+Installing experiment_logger script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+Installing ground_truth_publisher script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+Installing perception_node script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+Installing train_ppo script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+Installing visual_degradation_node script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+Installing visual_odometry_node script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+Installing waypoint_navigator script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+
+Installed /home/minat/robust-visual-navigation/build/visual_navigation_robot
+running symlink_data
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/ament_index
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/ament_index/resource_index
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/ament_index/resource_index/packages
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/resource/visual_navigation_robot -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/ament_index/resource_index/packages
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/package.xml -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/mapping.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/perception.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/gazebo.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/sensor_fusion.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/baseline_navigation.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/display_robot.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/degradation_experiment.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/launch/visual_odometry.launch.py -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/launch
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/urdf
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/urdf/robot_gazebo.xacro -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/urdf
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/urdf/materials.xacro -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/urdf
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/urdf/sensors.xacro -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/urdf
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/urdf/robot.urdf.xacro -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/urdf
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/urdf/robot_core.xacro -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/urdf
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/worlds
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/worlds/research_world.sdf -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/worlds
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/config
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/config/mapper_params_online_async.yaml -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/config
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/config/ekf_s1_vision_only.yaml -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/config
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/config/ekf_s3_vision_imu.yaml -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/config
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/config/ekf_s4_full_fusion.yaml -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/config
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/config/ekf_s2_vision_wheel.yaml -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/config
+creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/rviz
+symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/rviz/robot_view.rviz -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/rviz

@@ -1,0 +1,24 @@
+[2.277s] Invoking command in '/home/minat/robust-visual-navigation/build/visual_navigation_robot': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/minat/robust-visual-navigation/build/visual_navigation_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/minat/robust-visual-navigation/build/visual_navigation_robot/build --no-deps symlink_data
+[2.817s] running develop
+[3.190s] running egg_info
+[3.227s] writing visual_navigation_robot.egg-info/PKG-INFO
+[3.228s] writing dependency_links to visual_navigation_robot.egg-info/dependency_links.txt
+[3.228s] writing entry points to visual_navigation_robot.egg-info/entry_points.txt
+[3.228s] writing requirements to visual_navigation_robot.egg-info/requires.txt
+[3.228s] writing top-level names to visual_navigation_robot.egg-info/top_level.txt
+[3.299s] reading manifest file 'visual_navigation_robot.egg-info/SOURCES.txt'
+[3.301s] writing manifest file 'visual_navigation_robot.egg-info/SOURCES.txt'
+[3.340s] running build_ext
+[3.340s] Creating /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/python3.12/site-packages/visual-navigation-robot.egg-link (link to .)
+[3.341s] Installing experiment_logger script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+[3.342s] Installing ground_truth_publisher script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+[3.342s] Installing perception_node script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+[3.342s] Installing train_ppo script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+[3.343s] Installing visual_degradation_node script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+[3.343s] Installing visual_odometry_node script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+[3.343s] Installing waypoint_navigator script to /home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/visual_navigation_robot
+[3.344s] 
+[3.344s] Installed /home/minat/robust-visual-navigation/build/visual_navigation_robot
+[3.345s] running symlink_data
+[3.345s] symbolically linking /home/minat/robust-visual-navigation/build/visual_navigation_robot/config/building_locations.yaml -> /home/minat/robust-visual-navigation/install/visual_navigation_robot/share/visual_navigation_robot/config
+[3.425s] Invoked command in '/home/minat/robust-visual-navigation/build/visual_navigation_robot' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/minat/robust-visual-navigation/build/visual_navigation_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/minat/robust-visual-navigation/install/visual_navigation_robot/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/minat/robust-visual-navigation/build/visual_navigation_robot/build --no-deps symlink_data

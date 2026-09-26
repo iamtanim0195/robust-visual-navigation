@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: visual-navigation-robot
 Version: 0.1.0
-Summary: Robust Vision-Based Autonomous Navigation for a Low-Cost Mobile Robot under Visual Degradation
+Summary: Robust Vision-Based Autonomous Navigation
 Maintainer: Md. Sahadat Hossen Tanim
 Maintainer-email: tanim@todo.todo
 License: Apache-2.0

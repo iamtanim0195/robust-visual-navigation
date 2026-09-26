@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Navigation Control Center</title>
+    <script src="https://cdn.jsdelivr.net/npm/roslib@1/build/roslib.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #334155;
+            margin-bottom: 20px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .connected { background-color: #10b981; color: #1e293b; }
+        .disconnected { background-color: #ef4444; color: #ffffff; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .nav-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .nav-btn:hover { background-color: #2563eb; }
+        .nav-btn:active { transform: scale(0.98); }
+        .stream-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: #000;
+        }
+        .telemetry {
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.8;
+            background-color: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Autonomous Visual Navigation Dashboard</h1>
+        <span id="status" class="status-badge disconnected">Disconnected</span>
+    </div>
+
+    <div class="grid-container">
+        <!-- Room Selector Card -->
+        <div class="card">
+            <h2>Semantic Room Dispatch</h2>
+            <p>Select a destination room for the robot to navigate to:</p>
+            <div class="btn-grid">
+                <button class="nav-btn" onclick="sendGoal('room_1')">Room 1 (Office)</button>
+                <button class="nav-btn" onclick="sendGoal('room_2')">Room 2 (Lab)</button>
+                <button class="nav-btn" onclick="sendGoal('room_3')">Room 3 (Conference)</button>
+                <button class="nav-btn" style="background-color: #10b981;" onclick="sendGoal('home')">Home Base</button>
+            </div>
+        </div>
+
+        <!-- Telemetry Card -->
+        <div class="card">
+            <h2>Live Robot Telemetry</h2>
+            <div class="telemetry">
+                Target Location: <span id="target_loc" style="color: #38bdf8;">None</span><br>
+                Pose X: <span id="pose_x">0.00</span> m<br>
+                Pose Y: <span id="pose_y">0.00</span> m<br>
+                Yaw Orientation: <span id="pose_yaw">0.00</span> rad
+            </div>
+        </div>
+
+        <!-- Live Camera Stream Card -->
+        <div class="card" style="grid-column: span 2;">
+            <h2>Onboard Vision Feed (/camera/image_raw)</h2>
+            <img class="stream-img" src="http://localhost:8080/stream?topic=/camera/image_raw" alt="Live Camera Stream (Start web_video_server)">
+        </div>
+    </div>
+
+    <script>
+        // Connect to ROS Bridge WebSocket
+        const ros = new ROSLIB.Ros({
+            url: 'ws://localhost:9090'
+        });
+
+        const statusLabel = document.getElementById('status');
+
+        ros.on('connection', () => {
+            statusLabel.innerText = 'System Connected';
+            statusLabel.className = 'status-badge connected';
+        });
+
+        ros.on('error', (error) => {
+            statusLabel.innerText = 'Connection Error';
+            statusLabel.className = 'status-badge disconnected';
+        });
+
+        ros.on('close', () => {
+            statusLabel.innerText = 'System Disconnected';
+            statusLabel.className = 'status-badge disconnected';
+        });
+
+        // Subscriber: /odometry/filtered
+        const odomSub = new ROSLIB.Topic({
+            ros: ros,
+            name: '/odometry/filtered',
+            messageType: 'nav_msgs/msg/Odometry'
+        });
+
+        odomSub.subscribe((message) => {
+            document.getElementById('pose_x').innerText = message.pose.pose.position.x.toFixed(2);
+            document.getElementById('pose_y').innerText = message.pose.pose.position.y.toFixed(2);
+            
+            // Extract yaw orientation
+            const q = message.pose.pose.orientation;
+            const siny_cosp = 2.0 * (q.w * q.z + q.x * q.y);
+            const cosy_cosp = 1.0 - 2.0 * (q.y * q.y + q.z * q.z);
+            const yaw = Math.atan2(siny_cosp, cosy_cosp);
+            document.getElementById('pose_yaw').innerText = yaw.toFixed(2);
+        });
+
+        // Publisher / Execution trigger for Goal Location
+        function sendGoal(locationName) {
+            document.getElementById('target_loc').innerText = locationName;
+            
+            // Execute ROS 2 Waypoint Navigation service/node trigger via ROS parameter bridge or topic
+            console.log("Navigating to: " + locationName);
+            
+            // Send Goal Marker / Goal Trigger
+            const goalTopic = new ROSLIB.Topic({
+                ros: ros,
+                name: '/selected_room',
+                messageType: 'std_msgs/msg/String'
+            });
+            goalTopic.publish({ data: locationName });
+        }
+    </script>
+</body>
+</html>

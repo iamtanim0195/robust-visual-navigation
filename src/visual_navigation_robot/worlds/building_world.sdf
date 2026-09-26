@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="building_world">
+    <!-- Physics Engine -->
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- Essential Plugins -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Sun / Lighting -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Ground Plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>30 30</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>30 30</size></plane></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.8 0.8 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Outer Perimeter Walls -->
+    <model name="outer_walls">
+      <static>true</static>
+      <link name="link">
+        <!-- North Wall -->
+        <visual name="wall_n"><pose>0 8 1.25 0 0 0</pose><geometry><box><size>16 0.2 2.5</size></box></geometry><material><ambient>0.6 0.6 0.6 1</ambient></material></visual>
+        <collision name="col_n"><pose>0 8 1.25 0 0 0</pose><geometry><box><size>16 0.2 2.5</size></box></geometry></collision>
+
+        <!-- South Wall -->
+        <visual name="wall_s"><pose>0 -8 1.25 0 0 0</pose><geometry><box><size>16 0.2 2.5</size></box></geometry><material><ambient>0.6 0.6 0.6 1</ambient></material></visual>
+        <collision name="col_s"><pose>0 -8 1.25 0 0 0</pose><geometry><box><size>16 0.2 2.5</size></box></geometry></collision>
+
+        <!-- East Wall -->
+        <visual name="wall_e"><pose>8 0 1.25 0 0 0</pose><geometry><box><size>0.2 16 2.5</size></box></geometry><material><ambient>0.6 0.6 0.6 1</ambient></material></visual>
+        <collision name="col_e"><pose>8 0 1.25 0 0 0</pose><geometry><box><size>0.2 16 2.5</size></box></geometry></collision>
+
+        <!-- West Wall -->
+        <visual name="wall_w"><pose>-8 0 1.25 0 0 0</pose><geometry><box><size>0.2 16 2.5</size></box></geometry><material><ambient>0.6 0.6 0.6 1</ambient></material></visual>
+        <collision name="col_w"><pose>-8 0 1.25 0 0 0</pose><geometry><box><size>0.2 16 2.5</size></box></geometry></collision>
+      </link>
+    </model>
+
+    <!-- Interior Walls (Corridor + 3 Rooms) -->
+    <model name="interior_partitions">
+      <static>true</static>
+      <link name="link">
+        <!-- Corridor Wall North (with Room 1 & Room 2 Doorways) -->
+        <visual name="corr_n1"><pose>-5.5 2 1.25 0 0 0</pose><geometry><box><size>5 0.2 2.5</size></box></geometry></visual>
+        <collision name="c_corr_n1"><pose>-5.5 2 1.25 0 0 0</pose><geometry><box><size>5 0.2 2.5</size></box></geometry></collision>
+        <visual name="corr_n2"><pose>0.5 2 1.25 0 0 0</pose><geometry><box><size>5 0.2 2.5</size></box></geometry></visual>
+        <collision name="c_corr_n2"><pose>0.5 2 1.25 0 0 0</pose><geometry><box><size>0.5 2 1.25 0 0 0</size></box></geometry></collision>
+        <visual name="corr_n3"><pose>6.5 2 1.25 0 0 0</pose><geometry><box><size>3 0.2 2.5</size></box></geometry></visual>
+        <collision name="c_corr_n3"><pose>6.5 2 1.25 0 0 0</pose><geometry><box><size>3 0.2 2.5</size></box></geometry></collision>
+
+        <!-- Corridor Wall South (with Room 3 Doorway & Junction) -->
+        <visual name="corr_s1"><pose>-3 -2 1.25 0 0 0</pose><geometry><box><size>10 0.2 2.5</size></box></geometry></visual>
+        <collision name="c_corr_s1"><pose>-3 -2 1.25 0 0 0</pose><geometry><box><size>10 0.2 2.5</size></box></geometry></collision>
+        <visual name="corr_s2"><pose>5 -2 1.25 0 0 0</pose><geometry><box><size>4 0.2 2.5</size></box></geometry></visual>
+        <collision name="c_corr_s2"><pose>5 -2 1.25 0 0 0</pose><geometry><box><size>4 0.2 2.5</size></box></geometry></collision>
+
+        <!-- Room Dividers -->
+        <visual name="div_r1_r2"><pose>-2 5 1.25 0 0 0</pose><geometry><box><size>0.2 6 2.5</size></box></geometry></visual>
+        <collision name="c_div_r1_r2"><pose>-2 5 1.25 0 0 0</pose><geometry><box><size>0.2 6 2.5</size></box></geometry></collision>
+        <visual name="div_r2_r3"><pose>3 5 1.25 0 0 0</pose><geometry><box><size>0.2 6 2.5</size></box></geometry></visual>
+        <collision name="c_div_r2_r3"><pose>3 5 1.25 0 0 0</pose><geometry><box><size>0.2 6 2.5</size></box></geometry></collision>
+      </link>
+    </model>
+
+    <!-- Interior Obstacles / Furniture Landmarks -->
+    <model name="room1_table">
+      <static>true</static>
+      <pose>-5 5 0.4 0 0 0</pose>
+      <link name="link">
+        <visual name="vis"><geometry><box><size>1.5 1.0 0.8</size></box></geometry><material><ambient>0.4 0.2 0.1 1</ambient></material></visual>
+        <collision name="col"><geometry><box><size>1.5 1.0 0.8</size></box></geometry></collision>
+      </link>
+    </model>
+
+    <model name="room2_pillar">
+      <static>true</static>
+      <pose>0.5 5 1.0 0 0 0</pose>
+      <link name="link">
+        <visual name="vis"><geometry><cylinder><radius>0.4</radius><length>2.0</length></cylinder></geometry><material><ambient>0.1 0.5 0.2 1</ambient></material></visual>
+        <collision name="col"><geometry><cylinder><radius>0.4</radius><length>2.0</length></cylinder></geometry></collision>
+      </link>
+    </model>
+
+    <model name="room3_desk">
+      <static>true</static>
+      <pose>5 -5 0.4 0 0 0</pose>
+      <link name="link">
+        <visual name="vis"><geometry><box><size>2.0 0.8 0.8</size></box></geometry><material><ambient>0.1 0.2 0.6 1</ambient></material></visual>
+        <collision name="col"><geometry><box><size>2.0 0.8 0.8</size></box></geometry></collision>
+      </link>
+    </model>
+    <!-- Include Visual Navigation Robot -->
+    <include>
+      <uri>file:///home/minat/robust-visual-navigation/src/visual_navigation_robot/urdf/robot.urdf</uri>
+      <name>visual_navigation_robot</name>
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>

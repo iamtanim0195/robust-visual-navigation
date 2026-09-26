@@ -1,84 +1,68 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
-import xacro
 
 def generate_launch_description():
-    pkg_name = 'visual_navigation_robot'
-    pkg_share = get_package_share_directory(pkg_name)
+    pkg_share = get_package_share_directory('visual_navigation_robot')
     ros_gz_sim_share = get_package_share_directory('ros_gz_sim')
 
-    # Paths
-    xacro_file = os.path.join(pkg_share, 'urdf', 'robot.urdf.xacro')
-    world_file = os.path.join(pkg_share, 'worlds', 'research_world.sdf')
-    rviz_config_file = os.path.join(pkg_share, 'rviz', 'robot_view.rviz')
+    default_world_path = os.path.join(pkg_share, 'worlds', 'building_world.sdf')
 
-    # Robot Description
-    robot_description_config = xacro.process_file(xacro_file)
-    robot_description = {'robot_description': robot_description_config.toxml()}
-
-    # ROS Nodes
-    node_robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[robot_description, {'use_sim_time': True}]
+    world_arg = DeclareLaunchArgument(
+        'world',
+        default_value=default_world_path,
+        description='Path to SDF world file'
     )
 
-    # Gazebo Sim Launch with -r (run physics automatically)
-    gazebo_sim = IncludeLaunchDescription(
+    gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(ros_gz_sim_share, 'launch', 'gz_sim.launch.py')
         ),
-        launch_arguments={'gz_args': f'-r -v 4 {world_file}'}.items()
+        launch_arguments={
+            'gz_args': PathJoinSubstitution(['-r -v 4 ', LaunchConfiguration('world')])
+        }.items()
     )
 
-    # Spawn Robot Entity
-    node_spawn_entity = Node(
-        package='ros_gz_sim',
-        executable='create',
-        arguments=[
-            '-topic', 'robot_description',
-            '-name', 'visual_navigation_robot',
-            '-z', '0.1'
-        ],
-        output='screen'
+    urdf_path = os.path.join(pkg_share, 'urdf', 'robot.urdf')
+    with open(urdf_path, 'r') as infp:
+        robot_description_raw = infp.read()
+
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='screen',
+        parameters=[{
+            'robot_description': robot_description_raw,
+            'use_sim_time': True
+        }]
     )
 
-    # ROS-Gazebo Topic Bridge
     node_ros_gz_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
             '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
+            '/model/visual_navigation_robot/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
             '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
             '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
             '/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
-            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU'
+            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU',
+            '/goal_marker@visualization_msgs/msg/Marker[gz.msgs.Marker'
         ],
         output='screen'
     )
-
-    # RViz2 Node
-    node_rviz = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', rviz_config_file],
-        parameters=[{'use_sim_time': True}]
-    )
-
+    
     return LaunchDescription([
-        node_robot_state_publisher,
-        gazebo_sim,
-        node_spawn_entity,
-        node_ros_gz_bridge,
-        node_rviz
+        world_arg,
+        gz_sim,
+        robot_state_publisher_node,
+        node_ros_gz_bridge
     ])

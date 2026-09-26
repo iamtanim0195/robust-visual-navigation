@@ -1,43 +1,54 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
     pkg_share = get_package_share_directory('visual_navigation_robot')
-    sensor_config = LaunchConfiguration('sensor_config', default='s4')
 
-    vo_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_share, 'launch', 'visual_odometry.launch.py')
-        )
+    sensor_config_arg = DeclareLaunchArgument(
+        'sensor_config',
+        default_value='s4',
+        description='Sensor Fusion Configuration Profile (s1, s2, s3, s4)'
     )
 
-    ekf_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_share, 'launch', 'sensor_fusion.launch.py')
-        ),
-        launch_arguments={'sensor_config': sensor_config}.items()
+    sensor_config = LaunchConfiguration('sensor_config')
+
+    # Visual Odometry Node
+    visual_odometry_node = Node(
+        package='visual_navigation_robot',
+        executable='visual_odometry_node',
+        name='visual_odometry_node',
+        parameters=[{'use_sim_time': True}],
+        output='screen'
     )
 
-    node_ground_truth = Node(
+    # Ground Truth Publisher Node
+    ground_truth_node = Node(
         package='visual_navigation_robot',
         executable='ground_truth_publisher',
         name='ground_truth_publisher',
+        parameters=[{'use_sim_time': True}],
+        output='screen'
+    )
+
+    # Robot Localization EKF Node
+    ekf_node = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
         output='screen',
-        parameters=[{'use_sim_time': True}]
+        parameters=[
+            os.path.join(pkg_share, 'config', 'ekf_s4_full_fusion.yaml'),
+            {'use_sim_time': True}
+        ]
     )
 
     return LaunchDescription([
-        DeclareLaunchArgument(
-            'sensor_config',
-            default_value='s4',
-            description='Sensor configuration: s1, s2, s3, s4'
-        ),
-        vo_launch,
-        ekf_launch,
-        node_ground_truth
+        sensor_config_arg,
+        visual_odometry_node,
+        ground_truth_node,
+        ekf_node
     ])
