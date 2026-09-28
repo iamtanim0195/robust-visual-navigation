@@ -14,6 +14,7 @@ launch/gazebo.launch.py
 launch/mapping.launch.py
 launch/perception.launch.py
 launch/sensor_fusion.launch.py
+launch/slam.launch.py
 launch/visual_odometry.launch.py
 resource/visual_navigation_robot
 rviz/robot_view.rviz
