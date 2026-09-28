@@ -47,5 +47,6 @@ visual_navigation_robot/perception/visual_degradation.py
 visual_navigation_robot/reinforcement_learning/__init__.py
 visual_navigation_robot/reinforcement_learning/nav_gym_env.py
 visual_navigation_robot/reinforcement_learning/train_ppo.py
+web_ui/index.html
 worlds/building_world.sdf
 worlds/research_world.sdf

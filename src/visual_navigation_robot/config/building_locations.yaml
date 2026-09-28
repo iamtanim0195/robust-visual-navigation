@@ -1,19 +1,26 @@
 locations:
   home:
+    description: "Corridor Junction / Starting Point"
     waypoints:
       - {x: 0.0, y: 0.0}
 
   room_1:
+    description: "Office Room 1 - Left Corridor Alignment"
     waypoints:
-      - {x: -2.5, y: 0.0}   # Drive down left corridor
-      - {x: -5.0, y: 5.0}   # Turn into Room 1
+      - {x: -2.0, y: 0.0}   # Align down left corridor
+      - {x: -2.0, y: 3.5}   # Center directly in front of Room 1 door
+      - {x: -5.0, y: 3.5}   # Drive straight through doorway into Room 1
 
   room_2:
+    description: "Lab Room 2 - Central Hall Alignment"
     waypoints:
-      - {x: 0.0, y: 2.5}    # Drive up central corridor
-      - {x: 0.5, y: 5.0}    # Turn into Room 2
+      - {x: 0.0, y: 2.5}    # Align down central hall
+      - {x: 0.0, y: 5.0}    # Center directly in front of Room 2 door
+      - {x: 0.5, y: 5.0}    # Drive straight into Room 2
 
   room_3:
+    description: "Conference Room 3 - Right Corridor Alignment"
     waypoints:
-      - {x: 2.5, y: 0.0}    # Drive down right corridor
-      - {x: 5.0, y: -5.0}   # Turn through doorway into Room 3
+      - {x: 2.0, y: 0.0}    # Align down right corridor
+      - {x: 2.0, y: -3.5}   # Center directly in front of Room 3 door
+      - {x: 5.0, y: -3.5}   # Drive straight through doorway into Room 3

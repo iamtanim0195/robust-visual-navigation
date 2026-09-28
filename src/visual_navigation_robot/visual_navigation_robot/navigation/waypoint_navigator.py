@@ -62,12 +62,14 @@ class WaypointNavigator(Node):
                     self.waypoints = [(float(wp['x']), float(wp['y'])) for wp in wp_data]
                     self.current_wp_idx = 0
                     self.get_logger().info(
-                        f"Loaded '{location_name}' with {len(self.waypoints)} waypoints."
+                        f"Loaded '{location_name}' with {len(self.waypoints)} sequential waypoints."
                     )
                 else:
-                    self.get_logger().error(f"Location '{location_name}' not found!")
+                    self.get_logger().error(f"Location '{location_name}' not found in building_locations.yaml!")
+            else:
+                self.get_logger().error(f"Config file missing at: {config_path}")
         except Exception as e:
-            self.get_logger().error(f"Failed to load location: {str(e)}")
+            self.get_logger().error(f"Failed to load location configuration: {str(e)}")
 
     def publish_goal_marker(self, x, y):
         marker = Marker()
@@ -117,7 +119,7 @@ class WaypointNavigator(Node):
             if self.current_wp_idx >= len(self.waypoints):
                 cmd = Twist()
                 self.cmd_vel_pub.publish(cmd)
-                self.get_logger().info("Target Destination Reached!")
+                self.get_logger().info("Target Destination Reached Cleanly!")
             return
 
         target_yaw = math.atan2(dy, dx)
