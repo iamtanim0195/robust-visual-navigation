@@ -2,6 +2,8 @@ package.xml
 setup.cfg
 setup.py
 config/building_locations.yaml
+config/building_map.data
+config/building_map.posegraph
 config/ekf_s1_vision_only.yaml
 config/ekf_s2_vision_wheel.yaml
 config/ekf_s3_vision_imu.yaml
