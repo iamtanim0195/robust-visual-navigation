@@ -4,10 +4,26 @@ locations:
     waypoints:
       - {x: 0.0, y: 0.0}
 
-  room_3:
-    description: "Conference Room 3 - Wide Corner Clearance"
+  room_1:
+    description: "Office Room 1 - Straight Entry Path"
     waypoints:
-      - {x: 1.5, y: 0.0}    # Point A: Center of main hall
-      - {x: 3.8, y: 0.0}    # Point B: Drive past the right wall corner completely
-      - {x: 3.8, y: -3.5}   # Point C: Drive straight down into Room 3 doorway
-      - {x: 5.5, y: -3.5}   # Point D: Inside Room 3
+      - {x: -2.0, y: 0.0}   # Align down left corridor center
+      - {x: -2.0, y: 3.5}   # Center in front of doorway
+      - {x: -3.5, y: 3.5}   # Drive straight through door frame
+      - {x: -5.0, y: 3.5}   # Enter Room 1
+
+  room_2:
+    description: "Lab Room 2 - Straight Entry Path"
+    waypoints:
+      - {x: 0.0, y: 2.5}    # Align down central hall
+      - {x: 0.0, y: 4.5}    # Center in front of doorway
+      - {x: 0.0, y: 5.5}    # Drive straight through door frame
+      - {x: 0.5, y: 5.5}    # Enter Room 2
+
+  room_3:
+    description: "Conference Room 3 - Straight Entry Path"
+    waypoints:
+      - {x: 2.5, y: 0.0}    # Align down right corridor center
+      - {x: 2.5, y: -5.5}   # Center directly in front of Room 3 door
+      - {x: 5.2, y: -5.5}   # Drive STRAIGHT through doorway frame (Zero turning)
+      - {x: 5.0, y: -3.5}   # Drive into Room 3 interior
